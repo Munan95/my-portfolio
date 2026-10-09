@@ -2,7 +2,9 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Button from "./components/Button";
 import CreativePhase from "./components/CreativePhase";
-import BuildingDesign from "./components/BuildingDesign";
+import UiUxHero from "./components/UiUxHero";
+import ScrollToggleSection from "./components/ScrollToggleSection";
+import CodeStuckSection from "./components/CodeStuckSection";
 
 const App = () => {
 
@@ -12,7 +14,9 @@ const App = () => {
       <Hero />
       <Button />
       <CreativePhase />
-      <BuildingDesign />
+      <UiUxHero />
+      <ScrollToggleSection />
+      <CodeStuckSection />
     </div>
   );
 };

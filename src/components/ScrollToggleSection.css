@@ -1,0 +1,140 @@
+/* Optional: add to index.html <head>
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet" /> */
+
+.sts {
+  /* --pin = extra scroll distance while the section stays pinned.
+     ~1 mouse-wheel notch is about 100px, so 200px ≈ 2 notches:
+     notch 1 → blue turns green, notch 2 → moves to the next section. */
+  --pin: 200px;
+  position: relative;
+  height: calc(100vh + var(--pin));
+  background: #000;
+  --accent: #0a9dff;
+  --glow: rgba(10, 157, 255, 0.45);
+  --slot: clamp(64px, 11vw, 154px);
+  --slot-h: clamp(52px, 8vw, 116px);
+}
+
+.sts[data-stage="code"] {
+  --accent: #1fa84a;
+  --glow: rgba(31, 168, 74, 0.4);
+}
+
+.sts__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sts__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 5vw, 56px);
+  padding: 0 20px;
+}
+
+/* ---------- Toggle ---------- */
+.sts__toggle {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, var(--slot));
+  padding: clamp(6px, 1vw, 12px);
+  background: #262626;
+  border: 1px solid #333;
+  border-radius: clamp(18px, 2.6vw, 34px);
+  box-shadow: 0 0 90px 12px var(--glow);
+  /* toggle is always visible; only the title shows/hides */
+  transition: box-shadow 0.6s ease;
+}
+
+.sts__indicator {
+  position: absolute;
+  top: clamp(6px, 1vw, 12px);
+  left: clamp(6px, 1vw, 12px);
+  width: var(--slot);
+  height: var(--slot-h);
+  background: #111;
+  border-radius: clamp(14px, 2vw, 26px);
+  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.8);
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.sts__tab {
+  position: relative;
+  z-index: 1;
+  height: var(--slot-h);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #bdbdbd;
+  cursor: default;
+  transition: color 0.45s ease, transform 0.45s ease;
+}
+
+.sts__tab svg {
+  width: clamp(28px, 4.4vw, 62px);
+  height: clamp(28px, 4.4vw, 62px);
+}
+
+.sts__tab.is-active {
+  color: var(--accent);
+  transform: scale(1.06);
+}
+
+/* ---------- Title ---------- */
+.sts__title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 6.2vw, 92px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Title is driven by scroll position through --in1 / --in2 / --out (set in JSX).
+   Appears slowly as you scroll into the section, hides slowly as you scroll out,
+   and plays in reverse when you scroll back. */
+.sts__content {
+  --in1: 0;
+  --in2: 0;
+  --out: 0;
+}
+
+.sts__line {
+  display: block;
+  will-change: opacity, transform;
+  /* short smoothing so wheel "steps" don't look jumpy */
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.sts__line:nth-child(1) {
+  opacity: calc(var(--in1) * (1 - var(--out)));
+  transform: translateY(calc((1 - var(--in1)) * 40px - var(--out) * 40px));
+}
+
+.sts__line:nth-child(2) {
+  opacity: calc(var(--in2) * (1 - var(--out)));
+  transform: translateY(calc((1 - var(--in2)) * 40px - var(--out) * 40px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sts__line,
+  .sts__indicator,
+  .sts__tab,
+  .sts__toggle {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+}

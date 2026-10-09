@@ -6,7 +6,7 @@ const Navbar = () => {
                 <a href="/#hero-section">
                     <img src="/src/assets/IMG/logo.png" alt="Logo" className="h-12" />
                 </a>
-                <div className="h-[2px] flex-1 rounded-full mx-16 bg-white/20">
+                <div className="h-[1px] flex-1 rounded-full mx-16 bg-white/30">
                 </div>
                 <div className="flex gap-12">
                     <a className="px-2 py-2 rounded-lg outline-[1px] outline-transparent transition-all duration-200 text-white hover:bg-white/10 hover:outline-white/15"

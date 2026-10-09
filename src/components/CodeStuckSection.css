@@ -1,0 +1,111 @@
+/* Optional fonts – add to index.html <head>:
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Source+Code+Pro&display=swap" rel="stylesheet" />
+*/
+
+.stuck {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ---------- Background code ---------- */
+.stuck__code {
+  position: absolute;
+  max-width: 42vw;
+  font-family: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(9px, 1.05vw, 13px);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  will-change: opacity, transform;
+}
+
+.stuck__code.is-on {
+  opacity: var(--o, 0.5);
+  transform: none;
+}
+
+.stuck__line {
+  white-space: pre;
+  line-height: 1.75;
+}
+
+/* responsive visibility (same idea as Tailwind: hidden sm:block / hidden md:block) */
+.stuck__code--sm,
+.stuck__code--md {
+  display: none;
+}
+@media (min-width: 640px) {
+  .stuck__code--sm {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .stuck__code--md {
+    display: block;
+  }
+}
+
+/* ---------- Title ---------- */
+.stuck__title {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0 24px;
+  text-align: center;
+  color: #fff;
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 6.2vw, 80px);
+  line-height: 1.2;
+}
+
+.stuck__word {
+  display: inline-block; /* keeps a word from breaking across lines */
+  white-space: nowrap;
+}
+
+.stuck__char {
+  display: inline-block;
+  /* hidden state = also the exit animation (quicker) */
+  opacity: 0;
+  transform: translateY(0.45em);
+  filter: blur(6px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease;
+  transition-delay: calc(var(--i) * 18ms);
+}
+
+/* entering the section: letters rise in one after another */
+.stuck__title.is-in .stuck__char {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition:
+    opacity 0.8s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.8s ease;
+  transition-delay: calc(var(--i) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stuck__code,
+  .stuck__char,
+  .stuck__title.is-in .stuck__char {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+}
