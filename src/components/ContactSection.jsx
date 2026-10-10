@@ -46,7 +46,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section ref={sectionRef} className={`contact ${inView ? "is-in" : ""}`}>
+    <section ref={sectionRef} className={`contact ${inView ? "is-in" : ""}`} data-nav-theme="light">
       <p className="contact__title">
         {/* Line 1: "Let's" is never hidden – on each letter's turn it fades + rises like line 2 */}
         <span className="contact__line">

@@ -1,0 +1,64 @@
+.totop {
+  --primary: #0fd6d9;
+  position: fixed;
+  right: 24px;
+  bottom: 56px; /* mobile */
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--primary);
+  /* default: over the black sections */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+
+  /* hidden until the page is scrolled */
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+@media (min-width: 768px) {
+  .totop {
+    bottom: 24px;
+  }
+}
+
+.totop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.totop:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* over the white contact section (same switch as the Navbar) */
+.totop.is-light {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.totop.is-light:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.totop__icon {
+  transition: transform 0.2s;
+}
+
+.totop:hover .totop__icon {
+  transform: translateY(-2px);
+}

@@ -1,0 +1,59 @@
+/* Sits at the bottom of the nearest positioned parent
+   (the parent needs `position: relative`). */
+.social {
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 16px 24px;
+}
+
+@media (min-width: 768px) {
+  .social {
+    padding: 12px 64px;
+  }
+}
+
+.social__line {
+  width: 100%;
+  height: 1px;
+  background: #ccd1da;
+}
+
+.social__row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.social__link {
+  display: inline-flex;
+  line-height: 0;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+/* LinkedIn turns brand blue on hover */
+.social__link--linkedin:hover {
+  color: #0a66c2;
+}
+
+/* Instagram swaps the grey outline for the gradient on hover */
+.social__ig-hover {
+  display: none;
+}
+
+.social__link--instagram:hover .social__ig-default {
+  display: none;
+}
+
+.social__link--instagram:hover .social__ig-hover {
+  display: block;
+}

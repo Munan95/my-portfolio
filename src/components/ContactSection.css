@@ -12,7 +12,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 0 24px;
-  background: #fff;
+  background: #ffffff;
   overflow: hidden;
   font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -67,7 +67,7 @@
 /* ---------- Letter reveal (line 2) – fade + rise ----------
    Hidden state = also the exit. When the section is entered, each letter
    fades and rises into place after its own --d delay. */
-   
+
 /* Initially hidden */
 .contact__char {
   display: inline-block;

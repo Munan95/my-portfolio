@@ -6,6 +6,8 @@ import UiUxHero from "./components/UiUxHero";
 import ScrollToggleSection from "./components/ScrollToggleSection";
 import CodeStuckSection from "./components/CodeStuckSection";
 import ContactSection from "./components/ContactSection";
+import SocialFooter from "./components/SocialFooter";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 const App = () => {
 
@@ -19,6 +21,8 @@ const App = () => {
       <ScrollToggleSection />
       <CodeStuckSection />
       <ContactSection />
+      <SocialFooter />
+      <ScrollToTopButton />
     </div>
   );
 };
