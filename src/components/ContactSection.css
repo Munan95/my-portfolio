@@ -1,0 +1,159 @@
+/* Fonts – add to index.html <head>:
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet" />
+   <link href="https://api.fontshare.com/v2/css?f[]=telma@700&display=swap" rel="stylesheet" />
+   ("create" uses Telma. Without it, it falls back to a cursive font.) */
+
+.contact {
+  --primary: #0fd6d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 24px;
+  background: #fff;
+  overflow: hidden;
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- Title ---------- */
+.contact__title {
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #000;
+  font-size: clamp(2rem, 6vw, 5rem);
+  letter-spacing: -0.025em;
+}
+
+.contact__line {
+  display: block;
+}
+
+.contact__word {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.28em;
+}
+
+.contact__word:last-child {
+  margin-right: 0;
+}
+
+.contact__gradient {
+  background: linear-gradient(90deg, #0fd6d9 0%, #43e5d8 24%, #7cf1d4 46%, #6be7e9 68%, #4db8ff 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 7s ease-in-out infinite;
+  font-family: "Telma", "Playball", "Brush Script MT", cursive;
+  padding-right: 0.12em; /* script letters overhang to the right */
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------- Letter reveal (line 2) – fade + rise ----------
+   Hidden state = also the exit. When the section is entered, each letter
+   fades and rises into place after its own --d delay. */
+   
+/* Initially hidden */
+.contact__char {
+  display: inline-block;
+}
+
+.contact__reveal {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5em);
+}
+
+/* Animate when the section enters the viewport */
+.contact.is-in .contact__reveal {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+
+  transition:
+    opacity 0.9s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+  transition-delay: var(--d, 0ms);
+}
+
+/* ---------- "Let's": same fade + rise as line 2, but never hidden ----------
+   The word is visible all the time. When the section is entered, each letter in
+   turn (--d) drops to the hidden state and fades/rises back in with the same
+   speed and easing as line 2. Replays on every re-entry. */
+.contact.is-in .contact__lchar {
+  /* no fill-mode: before its turn the letter stays visible */
+  animation: let-rise 1s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms);
+}
+
+@keyframes let-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Button ---------- */
+.contact__btn-wrap {
+  position: relative;
+  margin-top: 40px;
+}
+
+.contact__btn-outline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px dashed #6b7280;
+  border-radius: 8px;
+}
+
+.contact__btn {
+  position: relative;
+  display: block;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  background: #edfefd;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(99, 99, 99, 0.2);
+  will-change: transform;
+  transition: transform 0.25s ease-out; /* smooth magnetic movement */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact.is-in .contact__lchar {
+    animation: none;
+  }
+  .contact__reveal,
+  .contact.is-in .contact__reveal {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+  .contact__btn {
+    transition-duration: 0.01ms;
+  }
+  .contact__gradient {
+    animation: none;
+  }
+}

@@ -5,6 +5,7 @@ import CreativePhase from "./components/CreativePhase";
 import UiUxHero from "./components/UiUxHero";
 import ScrollToggleSection from "./components/ScrollToggleSection";
 import CodeStuckSection from "./components/CodeStuckSection";
+import ContactSection from "./components/ContactSection";
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
       <UiUxHero />
       <ScrollToggleSection />
       <CodeStuckSection />
+      <ContactSection />
     </div>
   );
 };
